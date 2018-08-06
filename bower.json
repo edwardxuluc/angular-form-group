@@ -4,7 +4,7 @@
     "Edward paulino xuluc chulim <edward.xuluc@gmail.com>"
   ],
   "description": "Alternar las clases has-error y has-success de acuerdo al input del formulario",
-  "main": "index.js",
+  "main": "angular-form-group.js",
   "keywords": [
     "angular",
     "form",
