@@ -1,0 +1,19 @@
+{
+  "name": "angular-form-group",
+  "authors": [
+    "Edward paulino xuluc chulim <edward.xuluc@gmail.com>"
+  ],
+  "description": "Alternar las clases has-error y has-success de acuerdo al input del formulario",
+  "main": "index.js",
+  "keywords": [
+    "angular",
+    "form",
+    "group",
+    "class",
+    "has-success",
+    "has-error",
+    "edward"
+  ],
+  "license": "MIT",
+  "homepage": "edward.xuluc@gmail.com"
+}
