@@ -2,34 +2,20 @@
 
 angular.module('angular.form.group', [])
 
-.directive('formGroup', function(){
-    return{
-        scope: {
-            form : '=',
-            name : '@',
-        },
-        restrict: 'AC',
-        link: function( $scope, element, attrs, controller ){
+.directive('formGroup', function( $compile ){
+    return {
+        restrict : 'A',
+        link : function ( scope, element ){
 
-            $scope.$watchGroup(["form['"+ $scope.name + "'].$valid", "form['"+ $scope.name + "'].$pristine"], function ( value1, value2 ){
-                $scope.agregar_clases();
-            }, true);
+            var element   = angular.element( element );
+            var formName  = element.parents('[ng-form]').length ? element.parents('[ng-form]').attr('ng-form') : element.parents('form').attr('name');
+            var inputName = element.find('.form-control').attr('name');
 
-            $scope.agregar_clases = function (){
-                if( $scope.form && $scope.name ){
-                    if( $scope.form[ $scope.name ] ){
-                        if( !$scope.form[ $scope.name ].$pristine ){
-                            if( $scope.form[ $scope.name ].$valid ){
-                                element.removeClass('has-error').addClass('has-success');
-                            }else{
-                                element.removeClass('has-success').addClass('has-error');
-                            }
-                        }else{
-                            element.removeClass('has-success').removeClass('has-error');
-                        }
-                    }
-                }
-            };
+            if( formName && inputName ){
+                var new_element = $compile('<div ng-class="{\'has-error\':' + formName + '.' + inputName + '.$invalid && !' + formName + '.' + inputName + '.$pristine, \'has-success\':' + formName + '.' + inputName + '.$valid && !' + formName + '.' + inputName + '.$pristine}"></div>')( scope );
+                new_element.append( element.contents() );
+                element.html( new_element ); 
+            }
         }
-    };
+    }
 })
